@@ -1,0 +1,43 @@
+{
+  "name": "http-scope",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n server,vite \"tsx watch src/server.ts\" \"vite\"",
+    "dev:server": "tsx watch src/server.ts",
+    "dev:vite": "vite",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check",
+    "lint": "oxlint",
+    "lint:fix": "oxlint --fix",
+    "audit": "npm audit --audit-level=high",
+    "typecheck": "tsc --noEmit",
+    "build": "tsc && vite build",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run build && npm run audit",
+    "test:e2e": "npm run test:e2e:browser && npm run test:e2e:limits",
+    "test:e2e:browser": "playwright test",
+    "test:e2e:chromium": "playwright test --project=chromium",
+    "test:e2e:firefox": "playwright test --project=firefox",
+    "test:e2e:isolated": "E2E_APP_PORT=5174 E2E_API_PORT=3001 npm run test:e2e:browser",
+    "test:e2e:limits": "playwright test --config=playwright.limits.config.ts",
+    "start": "node dist/server.js"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "24.13.4",
+    "concurrently": "9.2.4",
+    "oxfmt": "0.27.0",
+    "oxlint": "1.82.0",
+    "tsx": "4.23.13",
+    "typescript": "5.9.3",
+    "vite": "7.3.6"
+  },
+  "engines": {
+    "node": ">=24.13.0",
+    "npm": ">=11.10.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true
+  }
+}

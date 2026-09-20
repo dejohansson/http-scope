@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HTTP Scope</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="controls" aria-label="Capture controls">
+        <div class="capture-form">
+          <div class="url-field">
+            <label for="target-url">Target URL</label>
+            <input
+              id="target-url"
+              type="url"
+              value="https://streaming-demo.labs.vercel.dev/suspense-demo"
+              spellcheck="false"
+            />
+          </div>
+          <button id="capture-action" type="button" class="capture-action">New capture</button>
+          <button
+            id="history-button"
+            type="button"
+            class="quiet icon-button"
+            aria-label="Open capture history"
+          >
+            <svg class="history-icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 10a8 8 0 1 1 2.3 5.7" />
+              <path d="M4 5v5h5" />
+              <path d="M12 8v4l2.5 1.5" />
+            </svg>
+            <span id="history-count" aria-hidden="true"></span>
+          </button>
+          <button
+            id="shortcuts-button"
+            type="button"
+            class="quiet icon-button"
+            aria-label="Open help"
+          >
+            ?
+          </button>
+        </div>
+        <p id="error" class="error" role="alert" hidden></p>
+      </section>
+
+      <dialog id="shortcuts-dialog" aria-labelledby="shortcuts-title">
+        <div class="dialog-heading">
+          <h2 id="shortcuts-title">Help &amp; shortcuts</h2>
+          <form method="dialog">
+            <button type="submit" class="quiet" aria-label="Close shortcuts">Close</button>
+          </form>
+        </div>
+        <p class="dialog-intro">
+          Enter a streaming URL and start a capture to inspect its response as it arrives. Then
+          browse finished chunks to view their contents.
+        </p>
+        <p class="dialog-note">
+          Completed captures are stored locally in this browser. Clear history to remove them.
+        </p>
+        <div id="shortcut-list"></div>
+      </dialog>
+
+      <dialog id="history-dialog" aria-labelledby="history-title">
+        <div class="dialog-heading">
+          <h2 id="history-title">Recent captures</h2>
+          <div class="dialog-actions">
+            <button id="clear-history-button" type="button" class="quiet">Clear</button>
+            <form method="dialog">
+              <button type="submit" class="quiet" aria-label="Close history">Close</button>
+            </form>
+          </div>
+        </div>
+        <p id="history-empty" class="history-empty" hidden>
+          No saved captures yet. Start a new capture to build your history.
+        </p>
+        <div id="history-list" class="history-list"></div>
+      </dialog>
+
+      <section class="summary" aria-live="polite">
+        <div><span>HTTP status</span><strong id="status">-</strong></div>
+        <div><span>Chunks</span><strong id="chunk-count">0</strong></div>
+        <div><span>Time</span><strong id="time">0 ms</strong></div>
+        <div><span>Bytes</span><strong id="byte-count">0 B</strong></div>
+        <div><span>Content type</span><strong id="content-type">-</strong></div>
+      </section>
+
+      <section class="workspace">
+        <aside class="chunk-panel">
+          <div class="panel-heading chunk-panel-heading">
+            <div>
+              <h2>Chunks</h2>
+              <span class="state-label"
+                ><i id="status-indicator" aria-hidden="true"></i
+                ><span id="capture-state">Waiting</span></span
+              >
+            </div>
+            <div class="grouping-controls">
+              <label class="grouping-window">
+                <span>Group threshold</span>
+                <span class="number-field">
+                  <input
+                    id="grouping-window"
+                    type="number"
+                    min="0"
+                    max="9999"
+                    step="1"
+                    value="10"
+                    inputmode="numeric"
+                  />
+                  <span>ms</span>
+                </span>
+              </label>
+            </div>
+          </div>
+          <p id="empty-state" class="empty-state">Waiting for capture to start.</p>
+          <ol id="chunk-list" class="chunk-list"></ol>
+        </aside>
+
+        <article class="chunk-detail">
+          <div class="panel-heading">
+            <div class="detail-heading">
+              <div class="detail-title-row">
+                <h2 id="detail-title">No chunk selected</h2>
+              </div>
+              <p id="detail-meta">The selected transport chunk will appear here.</p>
+            </div>
+            <div class="detail-actions">
+              <div class="view-toggle" role="radiogroup" aria-label="Detail view">
+                <button
+                  id="source-button"
+                  type="button"
+                  role="radio"
+                  aria-checked="true"
+                  class="quiet selected"
+                >
+                  Raw
+                </button>
+                <button
+                  id="preview-button"
+                  type="button"
+                  role="radio"
+                  aria-checked="false"
+                  class="quiet"
+                  disabled
+                >
+                  Preview
+                </button>
+              </div>
+              <div class="navigation">
+                <button id="previous-button" type="button" class="quiet" disabled>Previous</button>
+                <button id="next-button" type="button" class="quiet" disabled>Next</button>
+              </div>
+            </div>
+          </div>
+          <pre
+            id="chunk-output"
+            class="chunk-output"
+          ><code>Chunk details will appear here.</code></pre>
+          <p id="preview-empty" class="preview-empty" hidden></p>
+          <iframe
+            id="html-preview"
+            class="html-preview"
+            title="HTML response preview"
+            hidden
+          ></iframe>
+        </article>
+      </section>
+    </main>
+    <script type="module" src="/app.ts"></script>
+  </body>
+</html>
