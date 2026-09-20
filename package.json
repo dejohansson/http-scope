@@ -19,6 +19,7 @@
     "test:e2e:browser": "playwright test",
     "test:e2e:chromium": "playwright test --project=chromium",
     "test:e2e:firefox": "playwright test --project=firefox",
+    "test:e2e:fixture": "playwright test e2e/fixture",
     "test:e2e:isolated": "E2E_APP_PORT=5174 E2E_API_PORT=3001 npm run test:e2e:browser",
     "test:e2e:limits": "playwright test --config=playwright.limits.config.ts",
     "start": "node dist/server.js"

@@ -38,7 +38,7 @@ jobs:
         run: npx playwright install --with-deps chromium firefox
 
       - name: Run fixture browser tests
-        run: npx playwright test e2e/fixture --grep-invert "evicts the oldest completed backend capture at capacity"
+        run: npm run test:e2e:fixture
 
       - name: Run fixture limits test
-        run: npx playwright test --config=playwright.limits.config.ts
+        run: npm run test:e2e:limits

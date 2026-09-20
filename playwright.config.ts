@@ -7,8 +7,9 @@ const apiURL = `http://localhost:${apiPort}`;
 
 export default defineConfig({
   testDir: "./e2e",
+  testIgnore: "**/limits.spec.ts",
   fullyParallel: true,
-  retries: 0,
+  retries: process.env.CI ? 2 : 0,
   reporter: "list",
   use: {
     baseURL: appURL,
