@@ -1,6 +1,6 @@
 import { expect, test } from "./test.js";
 
-const backendURL = `http://localhost:${process.env.E2E_API_PORT ?? "3000"}`;
+const backendURL = `http://localhost:${process.env.E2E_API_PORT ?? "4000"}`;
 
 test("streams snapshot, metadata, chunks, and completion events", async ({ page, fixture }) => {
   await page.goto("/");

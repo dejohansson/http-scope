@@ -1,7 +1,7 @@
 import { defineConfig, devices } from "@playwright/test";
 
-const appPort = process.env.E2E_APP_PORT ?? "5173";
-const apiPort = process.env.E2E_API_PORT ?? "3000";
+const appPort = process.env.E2E_APP_PORT ?? "4500";
+const apiPort = process.env.E2E_API_PORT ?? "4000";
 const appURL = `http://localhost:${appPort}`;
 const apiURL = `http://localhost:${apiPort}`;
 

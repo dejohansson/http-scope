@@ -6,7 +6,7 @@ import { startCapture } from "./capture.js";
 import { MAX_CAPTURE_HISTORY } from "./shared/config.js";
 import type { CaptureSnapshot, CapturedChunk } from "./types.js";
 
-const port = Number(process.env.PORT ?? 3000);
+const port = Number(process.env.PORT ?? 4000);
 const maxCaptures = positiveInteger(process.env.MAX_CAPTURES, MAX_CAPTURE_HISTORY);
 const maxMemoryBytes = positiveInteger(process.env.MAX_MEMORY_MB, 500) * 1_000_000;
 const workingDirectory = process.cwd();

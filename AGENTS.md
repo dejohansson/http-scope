@@ -30,9 +30,9 @@ npm run test:e2e
 backend limits suite. Keep in mind that a failure in `./e2e/external` might indicate an issue with
 external dependencies rather than the application code itself.
 
-The standard E2E command uses ports `5173` and `3000` and reuses compatible servers that are
+The standard E2E command uses ports `4500` and `4000` and reuses compatible servers that are
 already running. Use `npm run test:e2e:isolated` to start a parallel app and backend on ports
-`5174` and `3001` instead.
+`4501` and `4001` instead.
 
 ## README.md
 
